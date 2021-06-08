@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="/categorias")
-public class CategoriaResource {
+public class CategoriaLeituraResource {
 
     @Autowired
     private CategoriaService service;
