@@ -4,5 +4,5 @@ import com.udemy.projeto.spring.domain.Categoria;
 
 public interface CategoriaService {
 
-    Categoria buscar(long id);
+    Categoria buscar(Integer id);
 }

@@ -1,7 +1,5 @@
 package com.udemy.projeto.spring.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,28 +7,22 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Produto implements Serializable {
+public class Estado implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    private double preco;
 
-    @JsonBackReference
-    @ManyToMany
-    @JoinTable(name = "PRODUTO_CATEGORIA",
-        joinColumns = @JoinColumn(name = "produto_id"),
-        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    private List<Categoria> categorias = new ArrayList<>();
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
 
-    public Produto() {
+    public Estado() {
     }
 
-    public Produto(String nome, double preco) {
+    public Estado(String nome) {
         this.nome = nome;
-        this.preco = preco;
     }
 
     public Integer getId() {
@@ -49,28 +41,20 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public double getPreco() {
-        return preco;
+    public List<Cidade> getCidades() {
+        return cidades;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Produto produto = (Produto) o;
-        return id.equals(produto.id);
+        Estado estado = (Estado) o;
+        return id.equals(estado.id);
     }
 
     @Override
