@@ -19,7 +19,7 @@ public class ClienteLeituraResource {
     private ClienteService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> buscar(@PathVariable Integer id) {
+    public ResponseEntity<Cliente> buscar(@PathVariable Integer id) {
         Cliente obj = service.buscar(id);
         return ResponseEntity.ok().body(obj);
     }

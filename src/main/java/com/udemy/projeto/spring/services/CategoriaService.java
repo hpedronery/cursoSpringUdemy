@@ -7,4 +7,6 @@ public interface CategoriaService {
     Categoria buscar(Integer id);
 
     Categoria criar(Categoria obj);
+
+    Categoria alterar(Integer id, Categoria obj);
 }

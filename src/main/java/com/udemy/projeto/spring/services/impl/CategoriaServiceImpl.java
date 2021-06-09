@@ -28,4 +28,11 @@ public class CategoriaServiceImpl implements CategoriaService {
         obj.setId(null);
         return repository.save(obj);
     }
+
+    @Override
+    public Categoria alterar(Integer id, Categoria novoObj) {
+        Categoria obj = buscar(id);
+        obj.setNome(novoObj.getNome());
+        return repository.save(obj);
+    }
 }

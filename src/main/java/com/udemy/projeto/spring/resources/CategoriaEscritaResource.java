@@ -22,4 +22,11 @@ public class CategoriaEscritaResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value="/{id}")
+    public ResponseEntity<Void> alterar(@RequestBody Categoria obj,
+                                        @PathVariable Integer id) {
+        service.alterar(id, obj);
+        return ResponseEntity.noContent().build();
+    }
 }
