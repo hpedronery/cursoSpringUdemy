@@ -1,6 +1,6 @@
 package com.udemy.projeto.spring.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,13 +16,14 @@ public class Produto implements Serializable {
     private String nome;
     private double preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
         joinColumns = @JoinColumn(name = "produto_id"),
         inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
@@ -34,6 +35,7 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public List<Pedido> getPedidos() {
         List<Pedido> lista = new ArrayList<>();
         for(ItemPedido x: itens) {
