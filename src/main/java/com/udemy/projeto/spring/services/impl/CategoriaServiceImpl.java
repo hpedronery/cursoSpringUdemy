@@ -22,4 +22,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
+
+    @Override
+    public Categoria criar(Categoria obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
 }
