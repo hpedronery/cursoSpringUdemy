@@ -1,10 +1,12 @@
 package com.udemy.projeto.spring.services.impl;
 
 import com.udemy.projeto.spring.domain.Categoria;
+import com.udemy.projeto.spring.exceptions.DataIntegrityException;
 import com.udemy.projeto.spring.exceptions.ObjectNotFoundException;
 import com.udemy.projeto.spring.repositories.CategoriaRepository;
 import com.udemy.projeto.spring.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -34,5 +36,15 @@ public class CategoriaServiceImpl implements CategoriaService {
         Categoria obj = buscar(id);
         obj.setNome(novoObj.getNome());
         return repository.save(obj);
+    }
+
+    @Override
+    public void deletar(Integer id) {
+        buscar(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos vinculados.");
+        }
     }
 }

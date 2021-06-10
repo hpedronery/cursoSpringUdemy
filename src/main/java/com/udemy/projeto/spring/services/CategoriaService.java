@@ -9,4 +9,6 @@ public interface CategoriaService {
     Categoria criar(Categoria obj);
 
     Categoria alterar(Integer id, Categoria obj);
+
+    void deletar(Integer id);
 }
