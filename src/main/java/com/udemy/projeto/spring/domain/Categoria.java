@@ -1,16 +1,19 @@
 package com.udemy.projeto.spring.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Categoria {
+public class Categoria  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
 
     @ManyToMany(mappedBy="categorias")
@@ -20,6 +23,11 @@ public class Categoria {
     }
 
     public Categoria(String nome) {
+        this.nome = nome;
+    }
+
+    public Categoria(Integer id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 

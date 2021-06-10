@@ -1,6 +1,7 @@
 package com.udemy.projeto.spring.services.impl;
 
 import com.udemy.projeto.spring.domain.Categoria;
+import com.udemy.projeto.spring.dtos.CategoriaDTO;
 import com.udemy.projeto.spring.exceptions.DataIntegrityException;
 import com.udemy.projeto.spring.exceptions.ObjectNotFoundException;
 import com.udemy.projeto.spring.repositories.CategoriaRepository;
@@ -60,5 +61,10 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public List<Categoria> buscarLista() {
         return repository.findAll();
+    }
+
+    @Override
+    public Categoria transformarDTO (CategoriaDTO objDto){
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }
